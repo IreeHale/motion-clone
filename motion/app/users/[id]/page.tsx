@@ -3,5 +3,7 @@ const IdPage = () => {
         <div>
             ID page!
         </div>
-    )
-}
+    );
+};
+
+export default IdPage;
