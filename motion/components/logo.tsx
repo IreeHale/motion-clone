@@ -4,13 +4,16 @@ import Link from "next/link"
 export const Logo = () => {
     return (
         <Link href="#">
-            <div>
+            <div className="hover:opacity-75 transition items-center gap-x-2 md:flex">
                 <Image
-                    src="../public/logo.svg"
+                    src="/logo.svg"
                     alt="Logo"
                     height={30}
                     width={30}
                 />
+                <p className="text-lg text-neutral-700 pb-1 font-bold">
+                    Taskify
+                </p>
             </div>
         </Link>
     )
