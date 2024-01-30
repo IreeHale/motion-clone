@@ -4,6 +4,7 @@
         "nextjs",
         "Taskify",
         "trpc",
-        "usehooks"
+        "usehooks",
+        "zustand"
     ]
 }
