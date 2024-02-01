@@ -4,7 +4,6 @@ import { z } from "zod";
 
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export type State = {
     errors?:{
@@ -20,7 +19,7 @@ const CreateBoard = z .object({
 });
 
 
-export async function create(prevState:State, formData: FormData) {
+export async function create(prevState: State, formData: FormData) {
     const validatedFields = CreateBoard.safeParse({
         title: formData.get("title"),
     });
@@ -48,5 +47,4 @@ export async function create(prevState:State, formData: FormData) {
     }
 
     revalidatePath("organization/org_2bg21OWRPMT95nx8shvVZhctNBU");
-    redirect("organization/org_2bg21OWRPMT95nx8shvVZhctNBU");
   }
