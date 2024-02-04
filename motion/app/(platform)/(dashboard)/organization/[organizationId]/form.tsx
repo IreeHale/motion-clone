@@ -1,6 +1,6 @@
 "use client"
 
-import { FormButton } from "./form-button";
+import { FormSubmit } from "@/components/form/form-submit";
 import { createBoard } from "@/actions/create-board";
 import { FormInput } from "@/components/form/form-input";
 import { useAction } from "@/hooks/use-action";
@@ -29,7 +29,9 @@ export const Form = () => {
                 id="title"
                 errors={FieldErrors} />
             </div>
-            <FormButton />
+            <FormSubmit>
+                Save
+            </FormSubmit>
           </form>
     );
 };
