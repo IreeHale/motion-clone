@@ -5,6 +5,7 @@ import { unsplash } from "@/lib/unsplash";
 import { Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface FormPickerProps {
     id: string;
@@ -64,9 +65,16 @@ export const FormPicker = ({
                         key={image.id}
                         className={cn(
                             "cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted",
-                            pending && "opacity-50 hover:opacity-50 cursor-auto")}>
-
-
+                            pending && "opacity-50 hover:opacity-50 cursor-auto")} onClick ={() => {
+                                if (pending) return;
+                                setSelectedImageId(image.id);
+                            }}>
+                                <Image 
+                                    src={image.urls.thumb}
+                                    alt="Unsplash image"
+                                    className="object-cover rounded-sm"
+                                    fill
+                                />
                             </div>
                 ))}
             </div>
