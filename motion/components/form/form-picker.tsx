@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import { unsplash } from "@/lib/unsplash";
 import { Loader2 } from "lucide-react";
+import { useFormStatus } from "react-dom";
+import { cn } from "@/lib/utils";
 
 interface FormPickerProps {
     id: string;
@@ -14,6 +16,8 @@ export const FormPicker = ({
     id,
     errors,
 }: FormPickerProps) => {
+    const { pending } = useFormStatus();
+
     const [images, setImages] = useState<Array<Record<string, any>>>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedImageId, setSelectedImageId] = useState(null);
@@ -49,12 +53,23 @@ export const FormPicker = ({
             <div className="p-6 flex items-center justify-center">
                 <Loader2  className="h-6 w-6 text-sky-700 animate-spin" />
             </div>
-        )
+        );
     }
 
     return (
-        <div>
-            Form Picker!
+        <div className="relative">
+            <div className="grid grid-cols-3 gap-2 mb-2">
+                {images.map((image) => (
+                    <div
+                        key={image.id}
+                        className={cn(
+                            "cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted",
+                            pending && "opacity-50 hover:opacity-50 cursor-auto")}>
+
+
+                            </div>
+                ))}
+            </div>
         </div>
     );
 };
