@@ -28,7 +28,6 @@ export const FormPicker = ({
     useEffect(() => {
         const fetchImages = async () => {
             try{
-                throw new Error("Unsplash error")
                 const result = await unsplash.photos.getRandom({
                     collectionIds: ["317099"],
                     count: 9,
@@ -81,7 +80,9 @@ export const FormPicker = ({
                                     href={image.links.html}
                                     target="_blank"
                                     className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover: underline p-1 bg-black/10"
-                                ></Link>
+                                >
+                                    {image.user.name}
+                                </Link>
                             </div>
                 ))}
             </div>
