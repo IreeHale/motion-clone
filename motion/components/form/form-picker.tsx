@@ -2,10 +2,11 @@
 
 import { useEffect, useState } from "react";
 import { unsplash } from "@/lib/unsplash";
-import { Loader2 } from "lucide-react";
+import { Link, Loader2 } from "lucide-react";
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import { defaultImages } from "@/constants/images";
 
 interface FormPickerProps {
     id: string;
@@ -19,7 +20,7 @@ export const FormPicker = ({
 }: FormPickerProps) => {
     const { pending } = useFormStatus();
 
-    const [images, setImages] = useState<Array<Record<string, any>>>([]);
+    const [images, setImages] = useState<Array<Record<string, any>>>(defaultImages);
     const [isLoading, setIsLoading] = useState(true);
     const [selectedImageId, setSelectedImageId] = useState(null);
 
@@ -27,6 +28,7 @@ export const FormPicker = ({
     useEffect(() => {
         const fetchImages = async () => {
             try{
+                throw new Error("Unsplash error")
                 const result = await unsplash.photos.getRandom({
                     collectionIds: ["317099"],
                     count: 9,
@@ -40,7 +42,7 @@ export const FormPicker = ({
                 }
             } catch (error) {
                 console.log(error);
-                setImages([]);
+                setImages(defaultImages);
             } finally {
                 setIsLoading(false);
             }
@@ -75,6 +77,11 @@ export const FormPicker = ({
                                     className="object-cover rounded-sm"
                                     fill
                                 />
+                                <Link 
+                                    href={image.links.html}
+                                    target="_blank"
+                                    className="opacity-0 group-hover:opacity-100 absolute bottom-0 w-full text-[10px] truncate text-white hover: underline p-1 bg-black/10"
+                                ></Link>
                             </div>
                 ))}
             </div>
