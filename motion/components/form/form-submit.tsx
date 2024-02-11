@@ -3,7 +3,6 @@
 import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { ReactNode } from "react";
 
 
 interface FormSubmitProps {
@@ -18,7 +17,7 @@ export const FormSubmit = ({
     children,
     disabled,
     className,
-    variant
+    variant = "primary"
 }: FormSubmitProps) => {
     const { pending } = useFormStatus();
 

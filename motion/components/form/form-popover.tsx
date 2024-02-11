@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { X } from "lucide-react";
 import { toast } from "sonner";
 import { FormPicker } from "./form-picker";
+import { ElementRef, useRef } from "react";
 
 interface FormPopoverProps {
     children: React.ReactNode;
@@ -29,13 +30,12 @@ export const FormPopover = ({
     align,
     sideOffset = 0,
 }: FormPopoverProps) => {
+    const closeRef = useRef<ElementRef<"button">>(null);
     const { execute, FieldErrors } = useAction(createBoard, {
         onSuccess: (data) => {
-            console.log({ data });
             toast.success("Board created!");
         },
         onError: (error) => {
-            console.log({ error });
             toast.error(error);
         }
     });
@@ -44,9 +44,8 @@ export const FormPopover = ({
         const title = formData.get("title") as string;
         const image = formData.get("image") as string;
 
-        console.log({image});
 
-        //execute({ title });
+        execute({ title, image });
     }
 
     return (
@@ -63,7 +62,7 @@ export const FormPopover = ({
                 <div className="text-sm font-medium text-center text-neutral-600 pb-4">
                     Create board
                 </div>
-                <PopoverClose asChild>
+                <PopoverClose ref={closeRef} asChild>
                     <Button className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600" variant="ghost" >
                         <X className="h-4 w-4"/>
                     </Button>
