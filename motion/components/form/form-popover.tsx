@@ -34,6 +34,7 @@ export const FormPopover = ({
     const { execute, FieldErrors } = useAction(createBoard, {
         onSuccess: (data) => {
             toast.success("Board created!");
+            closeRef.current?.click();
         },
         onError: (error) => {
             toast.error(error);
